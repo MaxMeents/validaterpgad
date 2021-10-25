@@ -92,21 +92,59 @@ for(var i = t.length - 6;i < t.length;i++){
 		}
 	}
 }
+WF = ri(1,7);
+if(WF == 1){
+$('#copyme').css({"font-family": "Bubblegum Sans, cursive"})
+}
+if(WF == 2){
+$('#copyme').css({"font-family": "Carter One, cursive"})
+}
+if(WF == 3){
+$('#copyme').css({"font-family": "Goldman, cursive"})
+}
+if(WF == 4){
+$('#copyme').css({"font-family": "Marck Script, cursive"})
+}
+if(WF == 5){
+$('#copyme').css({"font-family": "Merienda, cursive"})
+}
+if(WF == 6){
+$('#copyme').css({"font-family": "Oregano, cursive"})
+}
+if(WF == 7){
+$('#copyme').css({"font-family": "Sirin Stencil, cursive"})
+}
+
 $('.code').val(rsa).select();
-setTimeout(function(){
+window.numtries = 0;
+window.time = 1000;
+var copytimer = setInterval(function(){
+	window.numtries++
 	copyText(rsa);	
-}, 3000);
-setTimeout(function(){
-	alert("Text Copied!");
-}, 5000);
+}, window.time);
 
 
+function copysuccess(){
+	window.numtries = -1;
+	clearInterval(copytimer);
+	window.time = 99999999
+	window.open('javascript:window.open("", "_self", "");window.close();', '_self');
+
+}
+function copyfailed(){
+	//try again
+	window.time = 500;
+}
 
 
 //If you only want to put some Text in the Clipboard just use this function
 // and pass the string to copied as the argument.
 function copyText(text) {
-  navigator.clipboard.writeText(text);
+  navigator.clipboard.writeText(text).then(function() {
+  copysuccess();
+}, function() {
+  copyfailed();
+});
 }
 
 })
