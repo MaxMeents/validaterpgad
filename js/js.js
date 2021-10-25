@@ -93,35 +93,15 @@ for(var i = t.length - 6;i < t.length;i++){
 	}
 }
 $('.code').val(rsa).select();
-copyText(rsa);
-function fallbackCopyTextToClipboard(text) {
-  var textArea = document.createElement("textarea");
-  textArea.value = text;
-  
-  // Avoid scrolling to bottom
-  textArea.style.top = "0";
-  textArea.style.left = "0";
-  textArea.style.position = "fixed";
+setTimeout(function(){
+	copyText(rsa);	
+}, 3000);
+setTimeout(function(){
+	alert("Text Copied!");
+}, 5000);
 
-  document.body.appendChild(textArea);
-  textArea.focus();
-  textArea.select();
 
-  try {
-    var successful = document.execCommand('copy');
-    var msg = successful ? 'successful' : 'unsuccessful';
-    console.log('Fallback: Copying text command was ' + msg);
-  } catch (err) {
-    console.error('Fallback: Oops, unable to copy', err);
-  }
 
-  document.body.removeChild(textArea);
-}
-function copyTextFromElement(elementID) {
-  let element = document.getElementById(elementID); //select the element
-  let elementText = element.textContent; //get the text content from the element
-  copyText(elementText); //use the copyText function below
-}
 
 //If you only want to put some Text in the Clipboard just use this function
 // and pass the string to copied as the argument.
@@ -129,12 +109,4 @@ function copyText(text) {
   navigator.clipboard.writeText(text);
 }
 
-
-function copyToClipboard(text) {
-    var $temp = $("<input>");
-    $("body").append($temp);
-    $temp.val(text).select();
-    document.execCommand("copy");
-    $temp.remove();
-}
 })
